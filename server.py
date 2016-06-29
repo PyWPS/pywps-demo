@@ -7,12 +7,14 @@ from pywps import configuration
 
 
 class Server(PyWPSServerAbstract):
-    def __init__(self, host=None, port=None, debug=False, processes=[], config_file=None):
+    def __init__(self, host=None, port=None, debug=False, processes=[],
+            config_files=None):
+
         self.app = flask.Flask(__name__)
 
         # Load config files and override settings if any file specified
-        if config_file:
-            configuration.load_configuration(config_file)
+        if config_files:
+            configuration.load_configuration(config_files)
             self.host = configuration.get_config_value('server', 'url').split('://')[1]
             self.port = configuration.get_config_value('server', 'port')
             if self.port:
@@ -41,7 +43,7 @@ class Server(PyWPSServerAbstract):
             raise NoApplicableCode('File error: Could not create folder. %s' % e)
 
         self.processes = processes
-        self.service = Service(processes=self.processes)
+        self.service = Service(processes=self.processes, cfgfiles=config_files)
 
     def run(self):
         @self.app.route('/')

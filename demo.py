@@ -31,7 +31,7 @@ def main():
     parser.add_argument('-w', '--waitress', action='store_true')
     parser.add_argument('-d', '--daemon', action='store_true')
     args = parser.parse_args()
-    
+
     if args.daemon:
         pid = None
         try:
@@ -70,7 +70,7 @@ def start(args, kill = None):
 
     # List of servers to start up
     server_list = [
-        Server(processes=processes, host='0.0.0.0', port=5001, config_file=config_file),
+        Server(processes=processes, host='0.0.0.0', port=5001, config_files=[config_file]),
         Server(processes=processes, host='0.0.0.0', port=5002)
     ]
 
