@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<wps:Execute service="WPS" version="1.0.0" xmlns:wps="http://www.opengis.net/wps/1.0.0"
+             xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 ../wpsExecute_request.xsd">
+    <ows:Identifier>buffer</ows:Identifier>
+    <wps:DataInputs>
+        <wps:Input>
+            <ows:Identifier>poly_in</ows:Identifier>
+            <wps:Data>
+                <wps:ComplexData>
+                    <ogr:FeatureCollection
+                            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                            xsi:schemaLocation="http://ogr.maptools.org/ point.xsd"
+                            xmlns:ogr="http://ogr.maptools.org/"
+                            xmlns:gml="http://www.opengis.net/gml">
+                        <gml:boundedBy>
+                            <gml:Box>
+                                <gml:coord>
+                                    <gml:X>0.04853540200402788</gml:X>
+                                    <gml:Y>0.01369376726825339</gml:Y>
+                                </gml:coord>
+                                <gml:coord>
+                                    <gml:X>0.04853540200402788</gml:X>
+                                    <gml:Y>0.01369376726825339</gml:Y>
+                                </gml:coord>
+                            </gml:Box>
+                        </gml:boundedBy>
+                        <gml:featureMember>
+                            <ogr:point fid="point.0">
+                                <ogr:geometryProperty>
+                                    <gml:Point>
+                                        <gml:coordinates>0.048535402004028,0.013693767268253</gml:coordinates>
+                                    </gml:Point>
+                                </ogr:geometryProperty>
+                                <ogr:id>2</ogr:id>
+                            </ogr:point>
+                        </gml:featureMember>
+                    </ogr:FeatureCollection>
+                </wps:ComplexData>
+            </wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>buffer</ows:Identifier>
+            <wps:Data>
+                <wps:LiteralData>1</wps:LiteralData>
+            </wps:Data>
+        </wps:Input>
+    </wps:DataInputs>
+    <wps:ResponseForm>
+        <wps:ResponseDocument status="true" storeExecuteResponse="true">
+            <wps:Output asReference="false">
+                <ows:Identifier>buff_out</ows:Identifier>
+            </wps:Output>
+        </wps:ResponseDocument>
+    </wps:ResponseForm>
+</wps:Execute>

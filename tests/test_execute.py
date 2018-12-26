@@ -43,8 +43,7 @@ class Buffer(unittest.TestCase):
     def test_valid(self):
         "POST Execute request"
 
-        validate(self.url, self.schema_url, self.request_data)
-
+        assert validate(self.url, self.schema_url, self.request_data)
 
 
     #def test_valid_lineage(self):
@@ -69,7 +68,6 @@ class SyncAndAsync(unittest.TestCase):
         response_doc = etree.fromstring(response_data)
 
         return response_doc
-
 
     def test_sync(self):
         request = self._get_request('http://localhost:5000/static/requests/execute_buffer_post.xml')
@@ -100,7 +98,50 @@ class SyncAndAsync(unittest.TestCase):
             'wps:ComplexData/ogr:FeatureCollection',
             namespaces=NAMESPACES))
 
+    def test_sync_reference(self):
+        request = self._get_request('http://localhost:5000/static/requests/execute_buffer_sync_reference.xml')
+        response = self._get_response(request)
+
+        self.assertEqual(
+            response.xpath('//wps:ExecuteResponse/wps:Process/ows:Identifier',
+                           namespaces=NAMESPACES)[0].text, 'buffer')
+
+        self.assertEqual(
+            response.xpath(
+                '//wps:ExecuteResponse/wps:Status/wps:ProcessSucceeded',
+                namespaces=NAMESPACES)[0].text,
+            'PyWPS Process GDAL Buffer process finished')
+
+        self.assertEqual(len(response.xpath(
+            '//wps:ExecuteResponse/wps:ProcessOutputs/wps:Output',
+            namespaces=NAMESPACES)), 1)
+
+        self.assertEqual(response.xpath(
+            '//wps:ExecuteResponse/wps:ProcessOutputs/'
+            'wps:Output/wps:Reference',
+            namespaces=NAMESPACES)[0].get('mimeType'),
+                         'application/gml+xml')
+
+        self.assertTrue(response.xpath(
+            '//wps:ExecuteResponse/wps:ProcessOutputs/wps:Output/'
+            'wps:Reference',
+            namespaces=NAMESPACES))
+
+        data_href = response.xpath(
+            '//wps:ExecuteResponse/wps:ProcessOutputs/wps:Output/'
+            'wps:Reference',
+            namespaces=NAMESPACES)[0].get('href')
+
+        data = self._get_request(data_href)
+        data_doc = etree.fromstring(data)
+
+        self.assertTrue(data_doc.xpath('//ogr:FeatureCollection',
+                                       namespaces=NAMESPACES))
+
     def test_async(self):
+        """
+        This test fails for Docker. Docker supports only referenced output in response.
+        """
         request = self._get_request('http://localhost:5000/static/requests/execute_buffer_async.xml')
         response = self._get_response(request)
 
@@ -164,13 +205,14 @@ class SyncAndAsync(unittest.TestCase):
         data_href = status_doc.xpath(
             '//wps:ExecuteResponse/wps:ProcessOutputs/wps:Output/'
             'wps:Reference',
-            namespaces=NAMESPACES)[0].get('{http://www.w3.org/1999/xlink}href')
+            namespaces=NAMESPACES)[0].get('href')
 
         data = self._get_request(data_href)
         data_doc = etree.fromstring(data)
 
         self.assertTrue(data_doc.xpath('//ogr:FeatureCollection',
             namespaces=NAMESPACES))
+
 
 def load_tests(loader=None, tests=None, pattern=None):
     if not loader:

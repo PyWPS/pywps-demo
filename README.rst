@@ -1,24 +1,40 @@
 PyWPS demo with docker support
 ==============================
-Clone pywps-flask, install libraries, build docker image (due to GDAL compiling lasts quite long)::
+Install Docker. For detailed instruction see Docker `docs <https://docs.docker.com/install/linux/docker-ce/ubuntu/>`_.
+Check if Docker-engine is running.::
+
+    $ sudo apt install docker-ce
+    $ sudo systemctl status docker
+
+Clone pywps-flask, switch to docker_extension branch::
+
+    $ git clone https://github.com/lazaa32/pywps-flask.git
+    $ cd ./pywps-flask
+    $ git checkout docker_extension
+
+Install libraries, build docker image (due to GDAL compiling lasts quite long)::
 
     $ pip3 install -r requirements.txt
-    $ cd pywps-flask/docker/alpine/flask
-    $ docker build -t pywps_container .
+    $ cd ./docker/isolation
+    $ docker build -t pywps .
 
+Check ``pywps.cfg``, set mode to ``docker`` and docker image name to ``pywps``::
 
-Clone pywps and OWSLib::
-
-    $ git clone https://github.com/lazaa32/pywps.git
-    $ git clone https://github.com/lazaa32/OWSLib.git
-
-Set PYTHONPATH::
-
-    $ export PYTHONPATH=$PYTHONPATH:$PWD/OWSLib:$PWD/pywps
+    mode=docker
+    docker_img=pywps
 
 Run server::
 
-    python3 demo.py
+    $ cd pywps-flask
+    $ python3 demo.py
+
+Send example POST request::
+
+    $ curl -X POST -d @static/requests/execute_buffer_async_reference.xml http://localhost:5000/wps
+
+You should get response with ``ProcessAccepted`` status code. During execution check whether a container was created::
+
+    $ docker ps -a
 
 
 PyWPS example service

@@ -35,7 +35,7 @@
 		</wps:Input>
 	</wps:DataInputs>
         <wps:ResponseForm>
-           <wps:ResponseDocument status="false" storeExecuteResponse="true">
+           <wps:ResponseDocument status="true" storeExecuteResponse="true">
              <wps:Output asReference="false">
                <ows:Identifier>buff_out</ows:Identifier>
              </wps:Output>
