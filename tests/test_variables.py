@@ -59,7 +59,7 @@ class VariableTest(unittest.TestCase):
         process_return=resp.get_process_identifers()
         
         assert len(process_return) == 1   
-        assert process_return[0] in self.test_process
+        assert process_return[0][-1] in self.test_process
     
     def test_config_variable(self):
         """Test PYWPS_CFG"""
@@ -72,6 +72,8 @@ class VariableTest(unittest.TestCase):
     
     def tearDown(self):
         """Removing temporary folder"""
+        os.environ.pop("PYWPS_PROCESSES",None)
+        os.environ.pop("PYWPS_CFG",None)
         shutil.rmtree(self.tmp_dir)
     
 def load_tests(loader=None, tests=None, pattern=None):
