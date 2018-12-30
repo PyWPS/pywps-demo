@@ -16,3 +16,6 @@ pywps_demo.egg-info/
 
 # docs build artifacts
 _build/
+/pywps_flask.egg-info/
+/src/
+/.pytest_cache/

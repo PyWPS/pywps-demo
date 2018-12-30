@@ -28,28 +28,46 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 """
 
-__author__ = "Jachym Cepicky"
 
+import os
 from pywps.app.Service import Service
 
+from .processes import processes
+
+def create_app(cfgfiles=None):
+    config_files = [os.path.join(os.path.dirname(__file__), 'default.cfg')]
+    print(config_files)
+    if cfgfiles:
+        config_files.extend(cfgfiles)
+    if 'PYWPS_CFG' in os.environ:
+        config_files.append(os.environ['PYWPS_CFG'])
+    service = Service(processes=processes, cfgfiles=config_files)
+    return service
+
+
+application = create_app()
+
+
+#from pywps.app.Service import Service
+
 # processes need to be installed in PYTHON_PATH
-from processes.sleep import Sleep
-from processes.ultimate_question import UltimateQuestion
-from processes.centroids import Centroids
-from processes.sayhello import SayHello
-from processes.feature_count import FeatureCount
-from processes.buffer import Buffer
-from processes.area import Area
+#from processes.sleep import Sleep
+#from processes.ultimate_question import UltimateQuestion
+#from processes.centroids import Centroids
+#from processes.sayhello import SayHello
+#from processes.feature_count import FeatureCount
+#from processes.buffer import Buffer
+#from processes.area import Area
 
 
-processes = [
-    FeatureCount(),
-    SayHello(),
-    Centroids(),
-    UltimateQuestion(),
-    Sleep(),
-    Buffer(),
-    Area()
-]
+#processes = [
+#    FeatureCount(),
+#    SayHello(),
+#    Centroids(),
+#    UltimateQuestion(),
+#    Sleep(),
+#    Buffer(),
+#    Area()
+#]
 
-application = Service(processes, ['pywps.cfg'])
+#application = Service(processes, ['pywps.cfg'])

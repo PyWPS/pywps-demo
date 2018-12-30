@@ -1,16 +1,16 @@
 # Copyright (c) <year> <copyright holders>
-# 
-# 
+#
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-# 
+#
+# The above copyright notice and this permission notice
+# shall be included in all copies or substantial portions of the Software.
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,13 +33,13 @@ with open('requirements.txt') as f:
     INSTALL_REQUIRES.append('pywps=='+VERSION)
 
 DESCRIPTION = (
-'''PyWPS is an implementation of the Web Processing Service standard from the
+    '''PyWPS is an implementation of the Web Processing Service standard from the
 Open Geospatial Consortium. PyWPS is written in Python.
 
-PyWPS-Flask is an example service using the PyWPS server, distributed along 
-with a basic set of sample processes and sample configuration file. It's 
+PyWPS-Flask is an example service using the PyWPS server, distributed along
+with a basic set of sample processes and sample configuration file. It's
 usually used for testing and development purposes.
-''')
+    ''')
 
 KEYWORDS = 'PyWPS WPS OGC processing'
 
@@ -67,7 +67,8 @@ config = {
     'version': VERSION,
     'install_requires': INSTALL_REQUIRES,
     'dependency_links': [
-        'git+https://github.com/lazaa32/pywps.git@pywps-'+VERSION+'#egg=pywps-'+VERSION
+        'git+https://github.com/lazaa32/pywps.git@pywps-'
+        + VERSION + '#egg=pywps-' + VERSION
      ],
     'packages': ['processes', 'tests'],
     'scripts': ['demo.py'],

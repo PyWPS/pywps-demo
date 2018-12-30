@@ -1,0 +1,15 @@
+<GMLFeatureClassList>
+  <GMLFeatureClass>
+    <Name>point_buffer</Name>
+    <ElementPath>point_buffer</ElementPath>
+    <!--POLYGON-->
+    <GeometryType>3</GeometryType>
+    <DatasetSpecificInfo>
+      <FeatureCount>1</FeatureCount>
+      <ExtentXMin>-0.95146</ExtentXMin>
+      <ExtentXMax>1.04854</ExtentXMax>
+      <ExtentYMin>-0.98631</ExtentYMin>
+      <ExtentYMax>1.01369</ExtentYMax>
+    </DatasetSpecificInfo>
+  </GMLFeatureClass>
+</GMLFeatureClassList>

@@ -6,6 +6,7 @@ from tests import test_describe
 from tests import test_execute
 from tests import test_requests
 from tests import test_log
+from tests import test_variables
 #from tests import test_exceptions
 
 def load_tests(loader=None, tests=None, pattern=None):
@@ -14,7 +15,8 @@ def load_tests(loader=None, tests=None, pattern=None):
         test_describe.load_tests(),
         test_execute.load_tests(),
         test_requests.load_tests(),
-        test_log.load_tests()
+        test_log.load_tests(),
+        test_variables.load_tests()
     ])
 
 if __name__ == "__main__":
