@@ -9,4 +9,4 @@ Shapely
 Werkzeug
 SQLAlchemy
 psutil
-pywps
+pywps<4.3

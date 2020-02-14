@@ -3,7 +3,7 @@ Installation
 ============
 
 The app depends on PyWPS and several other libraries that are listed in
-``requirements.txt``. It is advisable to run it using a python virtualenv to prevent package instalation problems::
+``requirements.txt``. It is advisable to run it using a python virtualenv to prevent package installation problems::
 
     $ virtualenv -p python3 pywps_flask_env
     $ cd pywps_flask_dir
@@ -12,8 +12,15 @@ The app depends on PyWPS and several other libraries that are listed in
     $ cd pywps-flask
     $ pip3 install -r requirements.txt
 
+Alternatively you can also use a conda environment::
 
-If python virtualenv is not an option::
+    $ conda create -n pywps-flask python=3.6 pip psutil
+    $ conda activate pywps-flask
+    $ git clone https://github.com/geopython/pywps-flask
+    $ cd pywps-flask
+    $ pip install -r requirements.txt
+
+If python virtualenv or conda is not an option::
 
     $ git clone https://github.com/geopython/pywps-flask
     $ cd pywps-flask
@@ -54,10 +61,10 @@ The `-d`  option will run pywps-flask as daemon and to stop it is necessary to d
 Docker  images
 ==============
 
-The docker folder contains 2 subfolders, each subfolder contains a differente pywps implementation. 
+The docker folder contains 2 subfolders, each subfolder contains a differente pywps implementation.
 
 Folder ``flask``  has the default pywps-flask implementation using only Flask while folder ``nginx``  implements pywps using Nginx and Green unicorn as WSGI server. While folder ``ubuntu`` has the same images but using phusion image (ubuntu 18.04)
- 
+
 
 
 Flask-Alpine (basic)
@@ -67,18 +74,18 @@ Basic pywps image is based on Alpine 3.8 and will run the native Flask service, 
 
 
 
-To build the image (inside the folder with the Dockerfile):: 
+To build the image (inside the folder with the Dockerfile)::
 
     $ docker build -t pywps/flask-alpine .
 
-And to run it:: 
+And to run it::
 
     $ docker run -p 5000:5000 pywps/flask-alpine:latest
 
 
 Pywps will be available in  the following URL::
 
-    $ http://localhost:5000 
+    $ http://localhost:5000
 
 
 
@@ -94,9 +101,9 @@ This image implements the previous ``flask-alpine image`` (you need to build it 
 
 Gunicorn-Alpine is locate in folder ``docker/alpine/gunicorn/Dockerfile``
 
-This image can already be implemented in production but it is advisable to use Nginx for HTTP load balance and Gunicorn as WSGI server (see below) 
+This image can already be implemented in production but it is advisable to use Nginx for HTTP load balance and Gunicorn as WSGI server (see below)
 
-To build the image (inside the folder with the Dockerfile):: 
+To build the image (inside the folder with the Dockerfile)::
 
     $ docker build -t pywps/gunicorn-alpine:latest .
 
@@ -106,19 +113,19 @@ And to run it::
     $ docker run -p 8081:8081 -it pywps/gunicorn-alpine:latest
 
 or::
- 
+
     $ docker run -e GU_WORKERS=10 -e GU_PORT=8082  -p 8082:8082 -it pywps/gunicorn-alpine:latest
 
 Pywps will be available at the following URL::
 
-    $ http://localhost:8082 
+    $ http://localhost:8082
 
 
 Nginx-Alpine
 ------------
 
-This is the complete stack intented for production, to have a stack we require to use ``docker-compose`` 
-to build two images: ``pywps/gunicorn-alpine:latest``  and ``pywps/nginx-alpine:latest`` 
+This is the complete stack intented for production, to have a stack we require to use ``docker-compose``
+to build two images: ``pywps/gunicorn-alpine:latest``  and ``pywps/nginx-alpine:latest``
 
 Those images will be pulled from dockerhub, but they can compiled locally by building Flask-Alpine, Gunicron-Alpine and Nginx-Alpine, in this case only showing for nginx::
 
@@ -147,7 +154,7 @@ The same as ``Flask-Ubuntu`` but using phusion image (ubuntu 18.04)::
     $ docker build -t pywps/flask-ubuntu:latest .
 
 And to run it::
-  
+
     $ docker run -p 5000:5000 pywps/flask-ubuntu
 
 
@@ -185,14 +192,14 @@ Named volumes allow for container content to be available in the host system. Th
 * /pywps-flask/processes
 
 And file:
-* /pywps-flask/pywps.cfg 
+* /pywps-flask/pywps.cfg
 
 Named volumes need to be created prior to ``docker run``::
 
     $ docker volume create pywps_logs
     $ docker volume create pywps_outputs
     $ docker volume create pywps_processes
- 
+
 To check the path on the host to volume and other information::
 
 
@@ -201,7 +208,7 @@ To check the path on the host to volume and other information::
 
 To run a docker will all the volumes available in the host::
 
-  $ docker run -p 5000:5000 -v pywps_logs:/pywps-flask/pywps_logs \ 
+  $ docker run -p 5000:5000 -v pywps_logs:/pywps-flask/pywps_logs \
                             -v pywps_outputs:/pywps-flask/pywps_outputs \
                             -v pywps_processes:/pywps-flask/pywps_processes \
                             -v pywps_cfg:/pywps-flask/pywps.cfg  pywps/flask-alpine:latest
@@ -209,5 +216,3 @@ To run a docker will all the volumes available in the host::
 
 THE END
 =======
-
-
