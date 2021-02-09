@@ -6,7 +6,7 @@ from tests import test_describe
 from tests import test_execute
 from tests import test_requests
 from tests import test_log
-#from tests import test_exceptions
+
 
 def load_tests(loader=None, tests=None, pattern=None):
     return unittest.TestSuite([

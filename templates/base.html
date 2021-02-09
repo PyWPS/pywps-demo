@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+  <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
@@ -23,7 +24,7 @@
   <body>
     <div class="wrapper">
       <header>
-        <a href="{{ request_url }}"><img src="http://pywps.org/images/pywps.png"/></a>
+        <a href="{{ request_url }}"><img alt="PyWPS Logo" src="http://pywps.org/images/pywps.png"/></a>
         <ul style="list-style-type: none;">
           <li><a href="http://pywps.org/docs">Docs</a></li>
           <li><a href="http://pywps.org/download">Download</a></li>
@@ -37,7 +38,7 @@
           <li><a href="http://pywps.org/faq">FAQ</a></li>
           <li><a href="http://pywps.org/contributors">Contributors</a></li>
         </ul>
-        <img src="http://svn.osgeo.org/osgeo/marketing/logo/png8/150/OSGeo_incubation.png"/>
+        <img alt="OSGeo Incubation" src="http://svn.osgeo.org/osgeo/marketing/logo/png8/150/OSGeo_incubation.png"/>
       </header>
       <section>{% block major_content %} {% endblock %}</section>
       <footer>

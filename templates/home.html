@@ -12,18 +12,18 @@
 <p>
 	<a href='{{ server_url }}?request=GetCapabilities&service=WPS'
 		target="_blank" title='{{ server_url }}?request=GetCapabilities&service=WPS'> <img
-		src="/static/pics/PyWPS-GetCapabilities-brightgreen.svg" />
+		alt="PyWPS GetCapabilities" src="/static/pics/PyWPS-GetCapabilities-brightgreen.svg" />
 	</a> <a
 		href='{{ server_url }}?request=DescribeProcess&service=WPS&identifier=all&version=1.0.0'
 		target="_blank" title='{{ server_url }}?request=DescribeProcess&service=WPS&identifier=all&version=1.0.0'> <img
-		src="/static/pics/PyWPS-DescribeProcess-green.svg" />
+		alt="PyWPS DescribeProcess" src="/static/pics/PyWPS-DescribeProcess-green.svg" />
 	</a>
 </p>
 It exposes the following processes:
 <ul>
 	{% for name, abstract in process_descriptor.items() %}
-	<li><b>{{ name }}</b> - {{ abstract }}</li> &nbsp;&nbsp;  
-	<a href='{{ server_url }}?request=DescribeProcess&service=WPS&identifier={{name}}&version=1.0.0' target="_blank" title='{{ server_url }}?request=DescribeProcess&service=WPS&identifier={{ name }}&version=1.0.0'> <img src="/static/pics/PyWPS-DescribeProcess-green.svg" /></a>
+	<li><strong>{{ name }}</strong> - {{ abstract }}</li> &nbsp;&nbsp;
+	<a href='{{ server_url }}?request=DescribeProcess&service=WPS&identifier={{name}}&version=1.0.0' target="_blank" title='{{ server_url }}?request=DescribeProcess&service=WPS&identifier={{ name }}&version=1.0.0'> <img alt="PyWPS DescribeProcess" src="/static/pics/PyWPS-DescribeProcess-green.svg" /></a>
 	{% endfor %}
 </ul>
 
@@ -31,11 +31,11 @@ It exposes the following processes:
 <p></p>
 <p>
 	PyWPS documentation is at <a href="http://pywps.rtfd.org/"
-		target="_blank">pywps.rtfd.org</a>; source code and issue tracking at
-	<a href="https://github.com/geopython/pywps" target="_blank">
+		target="_blank" rel="noopener noreferrer">pywps.rtfd.org</a>; source code and issue tracking at
+	<a href="https://github.com/geopython/pywps" target="_blank" rel="noopener noreferrer">
 		github.com/geopython/pywps</a>. Code for this app is at <a
 		href="https://github.com/geopython/pywps-flask/blob/master/demo.py"
-		target="_blank">
+		target="_blank" rel="noopener noreferrer">
 		github.com/geopython/pywps-flask/blob/master/demo.py</a>.
 </p>
 

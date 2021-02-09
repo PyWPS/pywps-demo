@@ -243,11 +243,14 @@ latex_elements = {
 #'figure_align': 'htbp',
 }
 
+project_name = 'PyWPS-Flask'
+project_doc = project_name+' Documentation'
+
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'PyWPS-Flask.tex', u'PyWPS-Flask Documentation',
+    (master_doc, 'PyWPS-Flask.tex', project_doc,
      u'PyWPS Development Team', 'manual'),
 ]
 
@@ -277,7 +280,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'pywps-flask', u'PyWPS-Flask Documentation',
+    (master_doc, project_name, project_doc,
      [author], 1)
 ]
 
@@ -291,8 +294,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'PyWPS-Flask', u'PyWPS-Flask Documentation',
-     author, 'PyWPS-Flask', 'One line description of project.',
+    (master_doc, project_name, project_doc,
+     author, project_name, 'One line description of project.',
      'Miscellaneous'),
 ]
 

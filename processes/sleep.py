@@ -27,12 +27,11 @@ class Sleep(Process):
     SUCCESS_MESSAGE = 'done sleeping'
     
     def __init__(self):
-        inputs = [LiteralInput('delay',
-                               'Delay between every update',
-                               data_type='float')]
-        outputs = [LiteralOutput('sleep_output',
-                                 'Sleep Output',
-                                 data_type='string')]
+        inputs = [LiteralInput('delay', 'Delay between every update', data_type='float', default=10),
+                  LiteralInput('times', 'Update times', data_type='positiveInteger', default=5)]
+        outputs = [LiteralOutput('sleep_output', self.SUCCESS_MESSAGE+' Output', data_type='string'),
+                   LiteralOutput('time', 'Float Output response', data_type='float'),
+                   LiteralOutput('output', 'String Output response', data_type='string')]
 
         super(Sleep, self).__init__(
             self._handler,
@@ -52,22 +51,18 @@ class Sleep(Process):
     def _handler(self, request, response):
         import time
 
-        sleep_delay = request.inputs['delay'][0].data
-        if sleep_delay:
-            sleep_delay = float(sleep_delay)
-        else:
-            sleep_delay = 10
+        t = time.time()
+        sleep_delay = float(request.inputs['delay'][0].data)
+        sleep_times = int(request.inputs['times'][0].data)
 
-        time.sleep(sleep_delay)
-        response.update_status('PyWPS Process started. Waiting...', 20)
-        time.sleep(sleep_delay)
-        response.update_status('PyWPS Process started. Waiting...', 40)
-        time.sleep(sleep_delay)
-        response.update_status('PyWPS Process started. Waiting...', 60)
-        time.sleep(sleep_delay)
-        response.update_status('PyWPS Process started. Waiting...', 80)
-        time.sleep(sleep_delay)
+        for i in range(sleep_times):
+            response.update_status('PyWPS Process started. Waiting...', 100*i/sleep_times)
+            time.sleep(sleep_delay)
+        t = time.time() - t
+
         response.outputs['sleep_output'].data = self.SUCCESS_MESSAGE
+        response.outputs['time'].data = t
+        response.outputs['output'].data = 'I slept for {} sleep_delay'.format(t)
 
         return response
     
@@ -84,6 +79,7 @@ def main():
 
     assert response.outputs["sleep_output"].data == sleep.SUCCESS_MESSAGE
     print("All good!") 
+
 
 if __name__ == "__main__":
     main()

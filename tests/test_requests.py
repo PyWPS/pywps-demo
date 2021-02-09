@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from tests.common import validate_file, URL
+from tests.common import validate_file
 
 class RequestsTest(unittest.TestCase):
 
