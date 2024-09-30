@@ -6,7 +6,7 @@ The app depends on PyWPS and several other libraries that are listed in
 ``requirements.txt``. It is advisable to run it using a python virtualenv to prevent package instalation problems::
 
     $ virtualenv -p python3 pywps_flask_env
-    $ cd pywps_flask_dir
+    $ cd pywps_flask_env
     $ . bin/activate
     $ git clone https://github.com/geopython/pywps-flask
     $ cd pywps-flask
